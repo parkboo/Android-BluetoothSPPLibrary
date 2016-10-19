@@ -60,7 +60,7 @@ public class DeviceListActivity extends Activity {
                 } else {
                     Intent intent = new Intent(DeviceListActivity.this, DeviceList.class);
                     intent.putExtra("bluetooth_devices", "Bluetooth devices");
-                    intent.putExtra("no_devices_found", "No device");
+                    intent.putExtra("no_devices_found", "No devices found");
                     intent.putExtra("scanning", "Scanning");
                     intent.putExtra("scan_for_devices", "Search");
                     intent.putExtra("select_device", "Select");
