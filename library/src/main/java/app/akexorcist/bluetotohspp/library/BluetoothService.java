@@ -289,9 +289,9 @@ public class BluetoothService {
             // given BluetoothDevice
             try {
                 if(BluetoothService.this.isAndroid)
-                    tmp = device.createRfcommSocketToServiceRecord(UUID_ANDROID_DEVICE);
+                    tmp = device.createInsecureRfcommSocketToServiceRecord(UUID_ANDROID_DEVICE);
                 else
-                    tmp = device.createRfcommSocketToServiceRecord(UUID_OTHER_DEVICE);
+                    tmp = device.createInsecureRfcommSocketToServiceRecord(UUID_OTHER_DEVICE);
             } catch (IOException e) { }
             mmSocket = tmp;
         }

@@ -128,6 +128,6 @@ public class AutoConnectActivity extends Activity {
             }
         });
 
-        bt.autoConnect("IOIO");
+        bt.autoConnect("WOOSIM");
     }
 }
