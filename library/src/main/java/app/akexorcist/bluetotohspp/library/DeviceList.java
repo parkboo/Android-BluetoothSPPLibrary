@@ -172,13 +172,20 @@ public class DeviceList extends Activity {
             	mBtAdapter.cancelDiscovery();
 
             String strNoFound = getIntent().getStringExtra("no_devices_found");
-            if(strNoFound == null) 
+            if(strNoFound == null)
             	strNoFound = "No devices found";
 	        if(!((TextView) v).getText().toString().equals(strNoFound)) {
 	            // Get the device MAC address, which is the last 17 chars in the View
 	            String info = ((TextView) v).getText().toString();
 	            String address = info.substring(info.length() - 17);
-	            
+                try {
+                    connectedDeviceName = info.split("\n")[0].trim();
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "NullPointerException: info - " + info);
+                }
+
+                Log.d(TAG, "connectedDeviceName:" + connectedDeviceName);
+
 	            // Create the result Intent and include the MAC address
 	            Intent intent = new Intent();
 	            intent.putExtra(BluetoothState.DEVICE_NAME, connectedDeviceName);
@@ -201,7 +208,7 @@ public class DeviceList extends Activity {
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 // Get the BluetoothDevice object from the Intent
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                
+
                 // If it's already paired, skip it, because it's been listed already
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                     String strNoFound = getIntent().getStringExtra("no_devices_found");
@@ -212,7 +219,6 @@ public class DeviceList extends Activity {
                 		mPairedDevicesArrayAdapter.remove(strNoFound);
                 	}
                 	mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-                    connectedDeviceName = device.getName();
                 }
                 
             // When discovery is finished, change the Activity title
