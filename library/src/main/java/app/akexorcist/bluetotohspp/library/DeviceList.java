@@ -50,6 +50,7 @@ public class DeviceList extends Activity {
     private ArrayAdapter<String> mPairedDevicesArrayAdapter;
     private Set<BluetoothDevice> pairedDevices;
     private Button scanButton;
+    private String connectedDeviceName = "";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,8 +181,9 @@ public class DeviceList extends Activity {
 	            
 	            // Create the result Intent and include the MAC address
 	            Intent intent = new Intent();
+	            intent.putExtra(BluetoothState.DEVICE_NAME, connectedDeviceName);
 	            intent.putExtra(BluetoothState.EXTRA_DEVICE_ADDRESS, address);
-	
+
 	            // Set result and finish this Activity
 	            setResult(Activity.RESULT_OK, intent);
 	            finish();
@@ -210,6 +212,7 @@ public class DeviceList extends Activity {
                 		mPairedDevicesArrayAdapter.remove(strNoFound);
                 	}
                 	mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+                    connectedDeviceName = device.getName();
                 }
                 
             // When discovery is finished, change the Activity title
