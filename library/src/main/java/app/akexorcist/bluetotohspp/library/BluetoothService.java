@@ -113,8 +113,12 @@ public class BluetoothService {
 
         // Start the thread to connect with the given device
         mConnectThread = new ConnectThread(device);
-        mConnectThread.start();
-        setState(BluetoothState.STATE_CONNECTING);
+        if (mConnectThread.isSocketCreated()) {
+            mConnectThread.start();
+            setState(BluetoothState.STATE_CONNECTING);
+        } else {
+            Log.e(TAG, "Cannot start ConnectThread.  Socket was not created");
+        }
     }
 
     /**
@@ -292,11 +296,22 @@ public class BluetoothService {
                     tmp = device.createRfcommSocketToServiceRecord(UUID_ANDROID_DEVICE);
                 else
                     tmp = device.createRfcommSocketToServiceRecord(UUID_OTHER_DEVICE);
-            } catch (IOException e) { }
+            } catch (IOException e) {
+                Log.e(TAG, e.getMessage());
+            }
             mmSocket = tmp;
         }
 
+        public boolean isSocketCreated() {
+            return (mmSocket != null);
+        }
+
         public void run() {
+            if (mmSocket == null) {
+                Log.e(TAG, "socket was not created");
+                return;
+            }
+
             // Always cancel discovery because it will slow down a connection
             mAdapter.cancelDiscovery();
 
@@ -324,6 +339,11 @@ public class BluetoothService {
         }
 
         public void cancel() {
+            if (mmSocket == null) {
+                Log.e(TAG, "socket was not created");
+                return;
+            }
+
             try {
                 mmSocket.close();
             } catch (IOException e) { }
@@ -399,6 +419,11 @@ public class BluetoothService {
         }
 
         public void cancel() {
+            if (mmSocket == null) {
+                Log.e(TAG, "socket was not created");
+                return;
+            }
+
             try {
                 mmSocket.close();
             } catch (IOException e) { }

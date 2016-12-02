@@ -215,3 +215,6 @@ pip-log.txt
 .mr.developer.cfg
 .gradle/
 .idea/
+Android-BluetoothSPPLibrary.iml
+app/app.iml
+library/library.iml
