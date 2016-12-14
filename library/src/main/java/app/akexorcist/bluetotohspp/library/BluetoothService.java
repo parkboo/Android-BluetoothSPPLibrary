@@ -297,7 +297,7 @@ public class BluetoothService {
                 else
                     tmp = device.createRfcommSocketToServiceRecord(UUID_OTHER_DEVICE);
             } catch (IOException e) {
-                Log.e(TAG, e.getMessage());
+                Log.e(TAG, "" + e.getMessage());
             }
             mmSocket = tmp;
         }
