@@ -331,7 +331,7 @@ public class BluetoothSPP {
             final ArrayList<String> arr_filter_name = new ArrayList<String>();
             String[] arr_name = getPairedDeviceName();
             String[] arr_address = getPairedDeviceAddress();
-            for(int i = 0 ; i < arr_name.length ; i++) {
+            for(int i = 0 ; i < arr_name.length && i < arr_address.length; i++) {
                 if(arr_name[i].contains(keywordName)) {
                     arr_filter_address.add(arr_address[i]);
                     arr_filter_name.add(arr_name[i]);
