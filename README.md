@@ -1,3 +1,5 @@
+# Deprecated
+
 [![Build Status](https://travis-ci.org/akexorcist/Android-BluetoothSPP.svg?branch=master)](https://travis-ci.org/akexorcist/Android-BluetoothSPP)
 Android-BluetoothSPPLibrary
 ===========================
