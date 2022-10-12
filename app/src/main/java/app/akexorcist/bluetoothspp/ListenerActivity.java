@@ -70,6 +70,7 @@ public class ListenerActivity extends Activity {
 
         bt.setBluetoothConnectionListener(new BluetoothConnectionListener() {
             public void onDeviceConnected(String name, String address) {
+                Toast.makeText(getApplicationContext(), "Device Connected!!", Toast.LENGTH_SHORT).show();
                 Log.i("Check", "Device Connected!!");
             }
 
@@ -78,6 +79,7 @@ public class ListenerActivity extends Activity {
             }
 
             public void onDeviceConnectionFailed() {
+                Toast.makeText(getApplicationContext(), "Unable to Connected!!", Toast.LENGTH_SHORT).show();
                 Log.i("Check", "Unable to Connected!!");
             }
         });
