@@ -381,8 +381,10 @@ public class BluetoothService {
                 try {
                     int length = mmInStream.read(buffer);
 //                    int data = mmInStream.read();
+                    byte[] copied = new byte[length];
+                    System.arraycopy(buffer, 0, copied, 0, length);
                     mHandler.obtainMessage(BluetoothState.MESSAGE_READ
-                            , length, -1, buffer).sendToTarget();
+                            , length, -1, copied).sendToTarget();
 
 //                    if(data == 0x0A) {
 //                    } else if(data == 0x0D) {
